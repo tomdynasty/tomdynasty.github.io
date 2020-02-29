@@ -9,8 +9,8 @@ class OptionDom extends Component {
         <DateMessage />
         <Search />
       </div>
-    )
+    );
   }
 }
 
-export default OptionDom
+export default OptionDom;
