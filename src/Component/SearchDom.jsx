@@ -4,8 +4,8 @@ class SearchDom extends Component {
   render() {
     return (
       <div>
-        <option>1</option>
-        <option>12</option>
+        {/* <option>1</option>
+        <option>12</option> */}
       </div>
     );
   }

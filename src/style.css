@@ -1,0 +1,26 @@
+@import '.././node_modules/antd/dist/antd.css';
+
+.weekday {
+  font-size: 25px;
+}
+
+.date-info-group {
+  text-align: left;
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+
+.id-card-last-code {
+  color: yellow;
+  font-size: 14px;
+}
+
+.maskLogo {
+  margin-left: 45px;
+}
+
+.search-address {
+  border: none;
+  border-radius: 20px;
+  margin-top: 5px;
+}
