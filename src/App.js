@@ -3,14 +3,21 @@ import { Layout } from 'antd';
 import Option from './Container/Option';
 import './App.css';
 import DrugStore from './Container/DrugStore';
+import './style.css';
 
 function App() {
-  const { Header, Sider, Content } = Layout;
+  const {
+    Header,
+    Sider,
+    Content,
+    Footer,
+  } = Layout;
+
   return (
     <div>
       <Layout>
         <Sider
-         width="230px"
+         width="240px"
          breakpoint="lg"
          collapsedWidth="0">
           <Layout>
@@ -19,14 +26,14 @@ function App() {
               className="layout-side-bar-header">
               <Option/>
             </Header>
-            <Content>
+            <Content className="scroll">
               <DrugStore/>
             </Content>
           </Layout>
         </Sider>
         <Layout>
           <Content>Content</Content>
-          {/* <Footer>Footer</Footer> */}
+          <Footer>Footer</Footer>
         </Layout>
     </Layout>
     </div>

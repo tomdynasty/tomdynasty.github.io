@@ -2,6 +2,7 @@
 
 .weekday {
   font-size: 25px;
+  font-weight: bold;
 }
 
 .date-info-group {
@@ -16,11 +17,54 @@
 }
 
 .maskLogo {
-  margin-left: 45px;
+  margin-left: 85px;
 }
 
 .search-address {
   border: none;
   border-radius: 20px;
   margin-top: 5px;
+}
+
+.adult-mask-amount {
+  display: inline-block;
+  padding: 3px 15px;
+  border-radius: 15px;
+  background-color: #A5A5A5;
+  color:#FFF;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.child-mask-amount {
+  margin-left: 10px;
+  display: inline-block;
+  padding: 3px 15px;
+  border-radius: 15px;
+  background-color: #FFA573;
+  color:#FFF;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.amount-right {
+  padding-left: 10px;
+}
+
+.drug-store-content {
+  font-size: 10px;
+  line-height: 18px;
+}
+
+.drug-store-mask-amount-group {
+  margin-top: 10px;
+}
+
+.search-option-district {
+  margin-left: 10px;
+}
+
+.scroll {
+  overflow: scroll;
+  height: 370px;
 }
