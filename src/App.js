@@ -11,7 +11,6 @@ function App() {
     Header,
     Sider,
     Content,
-    Footer,
   } = Layout;
 
   return (
@@ -34,7 +33,6 @@ function App() {
         </Sider>
         <Layout>
           <Content><Map /></Content>
-          <Footer>Footer</Footer>
         </Layout>
     </Layout>
     </div>
