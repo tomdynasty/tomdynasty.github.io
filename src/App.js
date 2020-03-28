@@ -3,6 +3,7 @@ import { Layout } from 'antd';
 import Option from './Container/Option';
 import './App.css';
 import DrugStore from './Container/DrugStore';
+import Map from './Container/Map';
 import './style.css';
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
           </Layout>
         </Sider>
         <Layout>
-          <Content>Content</Content>
+          <Content><Map /></Content>
           <Footer>Footer</Footer>
         </Layout>
     </Layout>
