@@ -17,24 +17,26 @@ function App() {
     <div>
       <Layout>
         <Sider
-         width="240px"
-         breakpoint="lg"
-         collapsedWidth="0">
+          width="240px"
+          breakpoint="lg"
+          collapsedWidth="0"
+        >
           <Layout>
-            <Header 
-              style={{height:"32vh", lineHeight: "normal"}}
-              className="layout-side-bar-header">
-              <Option/>
+            <Header
+              style={{ height: '32vh', lineHeight: 'normal' }}
+              className="layout-side-bar-header"
+            >
+              <Option />
             </Header>
             <Content className="scroll">
-              <DrugStore/>
+              <DrugStore />
             </Content>
           </Layout>
         </Sider>
         <Layout>
           <Content><Map /></Content>
         </Layout>
-    </Layout>
+      </Layout>
     </div>
   );
 }

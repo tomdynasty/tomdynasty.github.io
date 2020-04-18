@@ -1,24 +1,35 @@
-import React from 'react';
-import { GoogleMap, withScriptjs, withGoogleMap } from 'react-google-maps';
+import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react';
 
-function GoogleMapSetting() {
-  return (
-    <GoogleMap
-      defaultZoom={10}
-      defaultCenter={{ lat: 25.032969, lng: 121.565414 }}
-    />
-  );
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
+class SimpleMap extends Component {
+  static defaultProps = {
+    center: {
+      lat: 59.95,
+      lng: 30.33,
+    },
+    zoom: 11,
+  };
+
+  render() {
+    return (
+      // Important! Always set the container height explicitly
+      <div style={{ height: '100vh', width: '100%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
+        >
+          <AnyReactComponent
+            lat={59.955413}
+            lng={30.337844}
+            text="My Marker"
+          />
+        </GoogleMapReact>
+      </div>
+    );
+  }
 }
-const WrappedMap = withScriptjs(withGoogleMap(GoogleMapSetting));
-export default function Map() {
-  return (
-    <WrappedMap
-      isMarkerShown
-      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&
-      libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_API_KEY}`}
-      loadingElement={<div style={{ height: '100%' }} />}
-      containerElement={<div style={{ height: '480px' }} />}
-      mapElement={<div style={{ height: '100%' }} />}
-    />
-  );
-}
+
+export default SimpleMap;
