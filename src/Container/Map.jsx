@@ -1,29 +1,44 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import axios from 'axios';
 
 class SimpleMap extends Component {
-  static defaultProps = {
-    center: {
-      lat: 59.95,
-      lng: 30.33,
-    },
-    zoom: 11,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      center: {
+        lat: 25.032969,
+        lng: 121.565414,
+      },
+      zoom: 11,
+      // data: [],
+    };
+  }
+
+  componentDidMount() {
+    const url = 'https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json';
+    axios.get(url).then((res) => {
+      // this.setState({
+      // });
+      // console.log(res.data);
+    });
+  }
 
   render() {
+    const { center } = this.state;
+    const { zoom } = this.state;
+    const Marker = () => <img src="https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png"></img>;
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
+          defaultCenter={center}
+          defaultZoom={zoom}
         >
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
+          <Marker
+            lat={25.032969}
+            lng={121.565414}
             text="My Marker"
           />
         </GoogleMapReact>
