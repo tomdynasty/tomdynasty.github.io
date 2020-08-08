@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
+import { meters2ScreenPixels } from 'google-map-react/utils';
 import axios from 'axios';
 
 class SimpleMap extends Component {
@@ -27,7 +28,8 @@ class SimpleMap extends Component {
   render() {
     const { center } = this.state;
     const { zoom } = this.state;
-    const Marker = () => <img src="https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png"></img>;
+    console.log({meters2ScreenPixels});
+    const Marker = () => <div className="marker" />;
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>

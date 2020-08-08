@@ -72,3 +72,35 @@
 .drug-store-title-eye {
   margin-right: 20px;
 }
+
+/* marker */
+
+.marker {
+  transform: perspective(40px) rotateX(20deg) rotateZ(-45deg);
+  transform-origin: 50% 50%;
+  border-radius: 50% 50% 50% 0;
+  padding: 0 3px 3px 0;
+  width: 20px;
+  height: 20px;
+  background: #ed1f34;
+  margin: -2.2em 0 0 -1.3em;
+  -webkit-box-shadow: -1px 1px 4px rgba(0, 0, 0, .5);
+  -moz-box-shadow: -1px 1px 4px rgba(0, 0, 0, .5);
+  box-shadow: -1px 1px 4px rgba(0, 0, 0, .5);
+}
+
+.marker:after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  margin: 7px 7px;
+  background: #ffffff;
+  position: absolute;
+  border-radius: 50%;
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+  box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+  -moz-box-shadow: inset -2px 2px 4px hsla(0, 0, 0, .5);
+  -webkit-box-shadow: inset -2px 2px 4px hsla(0, 0, 0, .5);
+  box-shadow: inset -2px 2px 4px hsla(0, 0, 0, .5);
+}
