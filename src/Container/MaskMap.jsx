@@ -65,7 +65,6 @@ const mapDispatchToProps = (dispatch) => ({
 
 MaskMap.propTypes = {
   dispatchReceiveDrugStores: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/require-default-props
   drugStoresMatchedMap: PropTypes.arrayOf(
     PropTypes.shape({
       geometry: PropTypes.object.isRequired,
