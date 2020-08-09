@@ -9,22 +9,36 @@ import DrugStore from './DrugStore';
 import Map from './Map';
 
 class MaskMap extends Component {
-  async componentDidMount() {
-    await this.props.dispatchReceiveDrugStores();
+  constructor(props) {
+    super(props);
+    this.state = {
+      towns: [],
+      defaultCounty: '新北市',
+    };
   }
 
-  render() {
-    const { drugStoresMatchedMap } = this.props;
-    // const counties = [];
-    // drugStoresMatchedMap.forEach((el) => {
-    //   const { properties } = el;
-    //   const { county } = properties;
-    //   if ((!counties.includes(county)) && counties !== '') {
-    //     counties.push(county);
-    //   }
-    // });
-    // console.log(counties);
+  async componentDidMount() {
+    await this.props.dispatchReceiveDrugStores();
+    await this.loadTownsFromCounty(this.state.defaultCounty);
+  }
 
+  loadTownsFromCounty = (val) => {
+    const { drugStoresMatchedMap } = this.props;
+    const towns = [];
+    drugStoresMatchedMap.forEach((el) => {
+      const { properties } = el;
+      const { town, county } = properties;
+      if ((!towns.includes(town)) && (county === val)) {
+        towns.push(town);
+      }
+    });
+    this.setState({
+      towns,
+    });
+  }
+
+
+  render() {
     const {
       Sider,
       Content,
@@ -41,7 +55,7 @@ class MaskMap extends Component {
               style={{ height: '25vh', lineHeight: 'normal' }}
               className="layout-side-bar-header"
             >
-              <Option />
+              <Option towns={this.state.towns} loadTownsFromCounty={this.loadTownsFromCounty}/>
             </div>
             <Content className="scroll" style={{ height: '80vh' }}>
               <DrugStore />

@@ -4,54 +4,25 @@ import PropTypes from 'prop-types';
 import SearchDom from '../Component/SearchDom';
 
 class Search extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      towns: [],
-      defaultCounty: '新北市',
-    };
-  }
-
-  componentDidMount() {
-    this.handleSelectCountyChange(this.state.defaultCounty);
-  }
-
-  handleSelectCountyChange = (val) => {
-    const { drugStoresMatchedMap } = this.props;
-    const towns = [];
-    drugStoresMatchedMap.forEach((el) => {
-      const { properties } = el;
-      const { town, county } = properties;
-      console.log(town);
-      if ((!towns.includes(town)) && (county === val)) {
-        towns.push(town);
-      }
-    });
-    console.log(towns);
-    this.setState({
-      towns,
-    });
-  }
-
   render() {
     return (
       <SearchDom
-        onSelectCountyChange={this.handleSelectCountyChange}
-        towns={this.state.towns}
-        defaultCounty={this.state.defaultCounty}
+        loadTownsFromCounty={this.props.loadTownsFromCounty}
+        towns={this.props.towns}
       />
     );
   }
 }
 
 Search.propTypes = {
-  // eslint-disable-next-line react/require-default-props
   drugStoresMatchedMap: PropTypes.arrayOf(
     PropTypes.shape({
       geometry: PropTypes.object.isRequired,
       properties: PropTypes.object.isRequired,
     }).isRequired,
   ),
+  towns: PropTypes.array.isRequired,
+  loadTownsFromCounty: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

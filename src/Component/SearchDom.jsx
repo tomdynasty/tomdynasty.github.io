@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-  Select,
-} from 'antd';
-// import { DownOutlined } from '@ant-design/icons';
+import { Select } from 'antd';
 import counties from '../Common/County';
 
 class SearchDom extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      defaultCounty: '臺北市',
+    };
+  }
+
   render() {
-    // const { Search } = Input;
-    const { towns, defaultCounty } = this.props;
     const { Option } = Select;
+    const { towns } = this.props;
     return (
       <div>
         <Select
           showSearch
-          defaultValue={defaultCounty}
-          onChange={this.props.onSelectCountyChange}
+          defaultValue={this.state.defaultCounty}
+          onChange={this.props.loadTownsFromCounty}
         >
           {
             counties.map((county) => (
@@ -28,7 +31,7 @@ class SearchDom extends Component {
         </Select>
         <Select
           className="search-option-district"
-          defaultValue={towns[0]}
+          value={towns[0]}
         >
           {
             towns.map((town) => (
@@ -51,9 +54,8 @@ class SearchDom extends Component {
 }
 
 SearchDom.propTypes = {
-  onSelectCountyChange: PropTypes.func.isRequired,
+  loadTownsFromCounty: PropTypes.func.isRequired,
   towns: PropTypes.array.isRequired,
-  defaultCounty: PropTypes.string.isRequired,
 };
 
 export default SearchDom;
