@@ -1,36 +1,51 @@
 module.exports = {
-  env: {
-    browser: true,
-    es6: true,
+  "env": {
+      "browser": true,
+      "es6": true
   },
-  parser: "babel-eslint",
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
+  "extends": [
+      "airbnb-base",
+      "plugin:react/recommended"
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
+  "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
   },
-  parser: "babel-eslint",
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2018,
-    sourceType: 'module',
+  "parser": "babel-eslint",
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": 6,
+      "sourceType": "module"
   },
-  settings: {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+  "settings": {
+      "import/resolver": {
+          "node": {
+              "extensions": [".js", ".jsx"]
+          }
       }
-    }
   },
-  plugins: [
-    'react',
+  "plugins": [
+      "react"
   ],
-  rules: {
-    "react/prefer-stateless-function": "off",
-  },
+  "rules": {
+      "class-methods-use-this": ["error", {
+          exceptMethods: [
+              "render",
+              "getInitialState",
+              "getDefaultProps",
+              "componentWillMount",
+              "componentDidMount",
+              "componentWillReceiveProps",
+              "shouldComponentUpdate",
+              "componentWillUpdate",
+              "componentDidUpdate",
+              "componentWillUnmount",
+          ],
+      }],
+      "no-control-regex": 0,
+      "import/no-named-as-default": 0,
+      "max-len" : ["error", {code : 120}],
+  }
 };
