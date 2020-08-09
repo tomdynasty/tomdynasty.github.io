@@ -9,6 +9,7 @@ class Option extends Component {
         towns={this.props.towns}
         loadTownsFromCounty={this.props.loadTownsFromCounty}
         selectedCounty={this.props.selectedCounty}
+        onsubmitSearch={this.props.onsubmitSearch}
       />
     );
   }
@@ -17,6 +18,7 @@ class Option extends Component {
 Option.propTypes = {
   towns: PropTypes.array.isRequired,
   loadTownsFromCounty: PropTypes.func.isRequired,
+  onsubmitSearch: PropTypes.func.isRequired,
   selectedCounty: PropTypes.string.isRequired,
 };
 

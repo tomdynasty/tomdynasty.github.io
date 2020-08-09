@@ -15,12 +15,14 @@ class MaskMap extends Component {
     this.state = {
       towns: [],
       selectedCounty: '',
+      filteredDrugStores: [],
     };
   }
 
   async componentDidMount() {
     await this.props.dispatchReceiveDrugStores();
     await this.loadTownsFromCounty(counties[1]);
+    await this.initializeDrugStores();
   }
 
   loadTownsFromCounty = (val) => {
@@ -39,6 +41,30 @@ class MaskMap extends Component {
     });
   }
 
+  onsubmitSearch = (selCounty, selTown) => {
+    const found = this.loadFilterdDrugStore(selCounty, selTown);
+    this.setState({
+      filteredDrugStores: found,
+    });
+  }
+
+  initializeDrugStores = () => {
+    const found = this.loadFilterdDrugStore(counties[1], this.state.towns[0]);
+    this.setState({
+      filteredDrugStores: found,
+    });
+  }
+
+  loadFilterdDrugStore = (selCounty, selTown) => {
+    const { drugStoresMatchedMap } = this.props;
+    const found = drugStoresMatchedMap.filter((el) => {
+      const { properties } = el;
+      const { town, county } = properties;
+      return (selCounty === county && selTown === town);
+    });
+    return found;
+  }
+
 
   render() {
     const {
@@ -48,7 +74,7 @@ class MaskMap extends Component {
     return (
       <Layout>
         <Sider
-          width="240px"
+          width="280px"
           breakpoint="lg"
           collapsedWidth="0"
         >
@@ -61,11 +87,15 @@ class MaskMap extends Component {
                 towns={this.state.towns}
                 loadTownsFromCounty={this.loadTownsFromCounty}
                 selectedCounty={this.state.selectedCounty}
+                onsubmitSearch={this.onsubmitSearch}
               />
             </div>
-            {/* <Content className="scroll" style={{ height: '80vh' }}>
-              <DrugStore />
-            </Content> */}
+            <Content className="scroll" style={{ height: '80vh' }}>
+              <DrugStore
+                initializeDrugStores={this.initializeDrugStores}
+                filteredDrugStores={this.state.filteredDrugStores}
+              />
+            </Content>
           </Layout>
         </Sider>
         <Layout>

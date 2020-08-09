@@ -107,4 +107,5 @@
 .search-icon:hover {
   background-color: transparent;
   cursor: pointer;
+  margin-left: 11px;
 }

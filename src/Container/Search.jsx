@@ -26,6 +26,7 @@ class Search extends Component {
         handleTownChange={this.handleTownChange}
         selectedTown={this.state.selectedTown === '' ? towns[0] : this.state.selectedTown}
         selectedCounty={this.props.selectedCounty}
+        onsubmitSearch={this.props.onsubmitSearch}
       />
     );
   }
@@ -40,6 +41,7 @@ Search.propTypes = {
   ),
   towns: PropTypes.array.isRequired,
   loadTownsFromCounty: PropTypes.func.isRequired,
+  onsubmitSearch: PropTypes.func.isRequired,
   selectedCounty: PropTypes.string.isRequired,
 };
 

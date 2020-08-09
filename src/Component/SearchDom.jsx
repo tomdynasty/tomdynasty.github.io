@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Select } from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import counties from '../Common/County';
 
 class SearchDom extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      defaultCounty: '臺北市',
-    };
-  }
-
   render() {
-    console.log(this.props.selectedCounty);
-    console.log(this.props.selectedTown);
     const { Option } = Select;
-    const { towns } = this.props;
+    const {
+      towns,
+      selectedTown,
+      selectedCounty,
+      onsubmitSearch,
+    } = this.props;
     return (
       <div>
         <Select
@@ -44,13 +42,13 @@ class SearchDom extends Component {
             ))
           }
         </Select>
-        {/* TODO Search func */}
-        {/* <Search
-          className="search-address"
-          placeholder="搜尋地址..."
-          onSearch={(value) => console.log(value)}
-          style={{ width: 220 }}
-        /> */}
+        <FontAwesomeIcon
+          icon={faSearch}
+          color="white"
+          size="lg"
+          className="search-option-district search-icon"
+          onClick={() => onsubmitSearch(selectedCounty, selectedTown)}
+        />
       </div>
     );
   }
@@ -58,6 +56,7 @@ class SearchDom extends Component {
 
 SearchDom.propTypes = {
   loadTownsFromCounty: PropTypes.func.isRequired,
+  onsubmitSearch: PropTypes.func.isRequired,
   handleTownChange: PropTypes.func.isRequired,
   towns: PropTypes.array.isRequired,
   selectedTown: PropTypes.string.isRequired,
