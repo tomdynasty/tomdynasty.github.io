@@ -17,6 +17,7 @@ class MaskMap extends Component {
       selectedCounty: '',
       filteredDrugStores: [],
       locations: [],
+      zoom: 11,
     };
   }
 
@@ -46,6 +47,14 @@ class MaskMap extends Component {
     const found = this.loadFilterdDrugStore(selCounty, selTown);
     this.setState({
       filteredDrugStores: found,
+      zoom: 18,
+    });
+    const newLocations = [];
+    found.forEach((el) => {
+      newLocations.push(el.geometry);
+      this.setState({
+        locations: newLocations,
+      });
     });
   }
 
@@ -53,6 +62,11 @@ class MaskMap extends Component {
     const found = this.loadFilterdDrugStore(counties[1], this.state.towns[0]);
     this.setState({
       filteredDrugStores: found,
+    });
+    found.forEach((el) => {
+      this.setState({
+        locations: [].concat(el.geometry),
+      });
     });
   }
 
@@ -76,6 +90,7 @@ class MaskMap extends Component {
     const { geometry } = found;
     this.setState({
       locations: [].concat(geometry),
+      zoom: 20,
     });
   }
 
@@ -117,6 +132,7 @@ class MaskMap extends Component {
           <Content>
             <Map
              locations={this.state.locations}
+             zoom={this.state.zoom}
             />
           </Content>
         </Layout>
