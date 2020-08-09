@@ -16,6 +16,7 @@ class MaskMap extends Component {
       towns: [],
       selectedCounty: '',
       filteredDrugStores: [],
+      locations: [],
     };
   }
 
@@ -65,6 +66,19 @@ class MaskMap extends Component {
     return found;
   }
 
+  handleSearchById = (searchId) => {
+    const { drugStoresMatchedMap } = this.props;
+    const found = drugStoresMatchedMap.find((el) => {
+      const { properties } = el;
+      const { id } = properties;
+      return (id === searchId);
+    });
+    const { geometry } = found;
+    this.setState({
+      locations: [].concat(geometry),
+    });
+  }
+
 
   render() {
     const {
@@ -94,12 +108,17 @@ class MaskMap extends Component {
               <DrugStore
                 initializeDrugStores={this.initializeDrugStores}
                 filteredDrugStores={this.state.filteredDrugStores}
+                handleSearchById={this.handleSearchById}
               />
             </Content>
           </Layout>
         </Sider>
         <Layout>
-          <Content><Map /></Content>
+          <Content>
+            <Map
+             locations={this.state.locations}
+            />
+          </Content>
         </Layout>
       </Layout>
     );

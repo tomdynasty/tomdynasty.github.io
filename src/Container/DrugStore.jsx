@@ -7,6 +7,7 @@ class DrugStore extends Component {
     return (
       <DrugStoreDom
        filteredDrugStores={this.props.filteredDrugStores}
+       handleSearchById={this.props.handleSearchById}
       />
     );
   }
@@ -14,6 +15,7 @@ class DrugStore extends Component {
 
 DrugStore.propTypes = {
   filteredDrugStores: PropTypes.array.isRequired,
+  handleSearchById: PropTypes.func.isRequired,
 };
 
 export default DrugStore;

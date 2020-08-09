@@ -6,8 +6,7 @@ import PropTypes from 'prop-types';
 
 class DrugStoreDom extends Component {
   render() {
-    const { filteredDrugStores } = this.props;
-    console.log(filteredDrugStores);
+    const { filteredDrugStores, handleSearchById } = this.props;
     return (
       <>
         {
@@ -28,9 +27,21 @@ class DrugStoreDom extends Component {
             title={name}
             extra={(
               <div>
-                <FontAwesomeIcon icon={faEye} color="#73c0d8" size="lg" />
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                <FontAwesomeIcon icon={faLocationArrow} color="#73c0d8" size="lg" />
+                <FontAwesomeIcon
+                  className='icon-hover'
+                  icon={faEye}
+                  color="#73c0d8"
+                  size="lg"
+                  onClick={() => handleSearchById(id)}
+                />
+                {/* <span>&nbsp;&nbsp;&nbsp;</span>
+                <FontAwesomeIcon
+                  className='icon-hover'
+                  icon={faLocationArrow}
+                  color="#73c0d8"
+                  size="lg"
+                  onClick={() => handleSearchById(id)}
+                /> */}
               </div>
               )}
            >
@@ -62,6 +73,7 @@ class DrugStoreDom extends Component {
 
 DrugStoreDom.propTypes = {
   filteredDrugStores: PropTypes.array.isRequired,
+  handleSearchById: PropTypes.func.isRequired,
 };
 
 export default DrugStoreDom;

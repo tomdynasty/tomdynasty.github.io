@@ -2,31 +2,23 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 // import { meters2ScreenPixels } from 'google-map-react/utils';
 import Marker from './Marker';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 
 class SimpleMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
       center: {
-        lat: 25.032969,
-        lng: 121.565414,
+        lat: 25.075321,
+        lng: 121.365495,
       },
       zoom: 11,
       // data: [],
     };
   }
 
-  componentDidMount() {
-    const url = 'https://raw.githubusercontent.com/kiang/pharmacies/master/json/points.json';
-    axios.get(url).then((res) => {
-      // this.setState({
-      // });
-      // console.log(res.data);
-    });
-  }
-
   render() {
+    const { locations } = this.props;
     const { center } = this.state;
     const { zoom } = this.state;
     return (
@@ -37,11 +29,23 @@ class SimpleMap extends Component {
           defaultCenter={center}
           defaultZoom={zoom}
         >
-          <Marker />
+          {
+            locations.map((geometry, index) => (
+              <Marker
+                key={index}
+                location={geometry.coordinates}
+              />
+            ))
+          }
         </GoogleMapReact>
       </div>
     );
   }
 }
+
+SimpleMap.propTypes = {
+  handleSearchByName: PropTypes.func.isRequired,
+  locations: PropTypes.array.isRequired,
+};
 
 export default SimpleMap;

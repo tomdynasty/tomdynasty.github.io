@@ -109,3 +109,9 @@
   cursor: pointer;
   margin-left: 11px;
 }
+
+.icon-hover:hover {
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: 1px;
+}
