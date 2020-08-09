@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { meters2ScreenPixels } from 'google-map-react/utils';
+// import { meters2ScreenPixels } from 'google-map-react/utils';
+import Marker from './Marker';
 import axios from 'axios';
 
 class SimpleMap extends Component {
@@ -28,8 +29,6 @@ class SimpleMap extends Component {
   render() {
     const { center } = this.state;
     const { zoom } = this.state;
-    console.log({meters2ScreenPixels});
-    const Marker = () => <div className="marker" />;
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
@@ -38,11 +37,7 @@ class SimpleMap extends Component {
           defaultCenter={center}
           defaultZoom={zoom}
         >
-          <Marker
-            lat={25.032969}
-            lng={121.565414}
-            text="My Marker"
-          />
+          <Marker />
         </GoogleMapReact>
       </div>
     );

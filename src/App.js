@@ -1,10 +1,12 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { Layout } from 'antd';
 import Option from './Container/Option';
 import './App.css';
 import DrugStore from './Container/DrugStore';
 import Map from './Container/Map';
 import './style.css';
+import Store from './Redux/store';
 
 function App() {
   const {
@@ -14,7 +16,7 @@ function App() {
   } = Layout;
 
   return (
-    <div>
+    <Provider store={Store}>
       <Layout>
         <Sider
           width="240px"
@@ -37,7 +39,7 @@ function App() {
           <Content><Map /></Content>
         </Layout>
       </Layout>
-    </div>
+    </Provider>
   );
 }
 
