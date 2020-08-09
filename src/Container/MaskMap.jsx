@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Layout } from 'antd';
+import PropTypes from 'prop-types';
+
 import { dispatchReceiveDrugStores } from '../Redux/Action/DrugStore';
 import Option from './Option';
 import DrugStore from './DrugStore';
 import Map from './Map';
 
 class MaskMap extends Component {
-  componentDidMount() {
-    this.props.dispatchReceiveDrugStores();
+  async componentDidMount() {
+    await this.props.dispatchReceiveDrugStores();
   }
 
   render() {
+    const { drugStoresMatchedMap } = this.props;
+    // const counties = [];
+    // drugStoresMatchedMap.forEach((el) => {
+    //   const { properties } = el;
+    //   const { county } = properties;
+    //   if ((!counties.includes(county)) && counties !== '') {
+    //     counties.push(county);
+    //   }
+    // });
+    // console.log(counties);
+
     const {
       Sider,
       Content,
@@ -25,12 +38,12 @@ class MaskMap extends Component {
         >
           <Layout>
             <div
-              style={{ height: '32vh', lineHeight: 'normal' }}
+              style={{ height: '25vh', lineHeight: 'normal' }}
               className="layout-side-bar-header"
             >
               <Option />
             </div>
-            <Content className="scroll">
+            <Content className="scroll" style={{ height: '80vh' }}>
               <DrugStore />
             </Content>
           </Layout>
@@ -43,12 +56,23 @@ class MaskMap extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  list: state.drugStores.list,
+  drugStoresMatchedMap: state.drugStores.list,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchReceiveDrugStores: () => dispatch(dispatchReceiveDrugStores()),
 });
+
+MaskMap.propTypes = {
+  dispatchReceiveDrugStores: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  drugStoresMatchedMap: PropTypes.arrayOf(
+    PropTypes.shape({
+      geometry: PropTypes.object.isRequired,
+      properties: PropTypes.object.isRequired,
+    }).isRequired,
+  ),
+};
 
 export default connect(
   mapStateToProps,
