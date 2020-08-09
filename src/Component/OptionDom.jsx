@@ -11,6 +11,7 @@ class OptionDom extends Component {
         <Search
           towns={this.props.towns}
           loadTownsFromCounty={this.props.loadTownsFromCounty}
+          selectedCounty={this.props.selectedCounty}
         />
       </div>
     );
@@ -20,6 +21,7 @@ class OptionDom extends Component {
 OptionDom.propTypes = {
   towns: PropTypes.array.isRequired,
   loadTownsFromCounty: PropTypes.func.isRequired,
+  selectedCounty: PropTypes.string.isRequired,
 };
 
 export default OptionDom;

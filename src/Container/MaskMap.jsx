@@ -7,19 +7,20 @@ import { dispatchReceiveDrugStores } from '../Redux/Action/DrugStore';
 import Option from './Option';
 import DrugStore from './DrugStore';
 import Map from './Map';
+import counties from '../Common/County';
 
 class MaskMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
       towns: [],
-      defaultCounty: '新北市',
+      selectedCounty: '',
     };
   }
 
   async componentDidMount() {
     await this.props.dispatchReceiveDrugStores();
-    await this.loadTownsFromCounty(this.state.defaultCounty);
+    await this.loadTownsFromCounty(counties[1]);
   }
 
   loadTownsFromCounty = (val) => {
@@ -34,6 +35,7 @@ class MaskMap extends Component {
     });
     this.setState({
       towns,
+      selectedCounty: val,
     });
   }
 
@@ -55,11 +57,15 @@ class MaskMap extends Component {
               style={{ height: '25vh', lineHeight: 'normal' }}
               className="layout-side-bar-header"
             >
-              <Option towns={this.state.towns} loadTownsFromCounty={this.loadTownsFromCounty}/>
+              <Option
+                towns={this.state.towns}
+                loadTownsFromCounty={this.loadTownsFromCounty}
+                selectedCounty={this.state.selectedCounty}
+              />
             </div>
-            <Content className="scroll" style={{ height: '80vh' }}>
+            {/* <Content className="scroll" style={{ height: '80vh' }}>
               <DrugStore />
-            </Content>
+            </Content> */}
           </Layout>
         </Sider>
         <Layout>

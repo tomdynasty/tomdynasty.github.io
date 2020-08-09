@@ -12,13 +12,15 @@ class SearchDom extends Component {
   }
 
   render() {
+    console.log(this.props.selectedCounty);
+    console.log(this.props.selectedTown);
     const { Option } = Select;
     const { towns } = this.props;
     return (
       <div>
         <Select
           showSearch
-          defaultValue={this.state.defaultCounty}
+          value={this.props.selectedCounty}
           onChange={this.props.loadTownsFromCounty}
         >
           {
@@ -31,7 +33,8 @@ class SearchDom extends Component {
         </Select>
         <Select
           className="search-option-district"
-          value={towns[0]}
+          value={this.props.selectedTown}
+          onChange={this.props.handleTownChange}
         >
           {
             towns.map((town) => (
@@ -55,7 +58,10 @@ class SearchDom extends Component {
 
 SearchDom.propTypes = {
   loadTownsFromCounty: PropTypes.func.isRequired,
+  handleTownChange: PropTypes.func.isRequired,
   towns: PropTypes.array.isRequired,
+  selectedTown: PropTypes.string.isRequired,
+  selectedCounty: PropTypes.string.isRequired,
 };
 
 export default SearchDom;

@@ -103,3 +103,8 @@
   -webkit-box-shadow: inset -2px 2px 4px hsla(0, 0, 0, .5);
   box-shadow: inset -2px 2px 4px hsla(0, 0, 0, .5);
 }
+
+.search-icon:hover {
+  background-color: transparent;
+  cursor: pointer;
+}
