@@ -52,10 +52,10 @@ class MaskMap extends Component {
     });
     const newLocations = [];
     found.forEach((el) => {
-      newLocations.push(el.geometry);
-      this.setState({
-        locations: newLocations,
-      });
+      newLocations.push(el.geometry.coordinates);
+    });
+    this.setState({
+      locations: newLocations,
     });
   }
 
@@ -64,10 +64,12 @@ class MaskMap extends Component {
     this.setState({
       filteredDrugStores: found,
     });
+    const newLocations = [];
     found.forEach((el) => {
-      this.setState({
-        locations: [].concat(el.geometry),
-      });
+      newLocations.push(el.geometry.coordinates);
+    });
+    this.setState({
+      locations: newLocations,
     });
   }
 

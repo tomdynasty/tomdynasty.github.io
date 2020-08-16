@@ -27,10 +27,10 @@ class SimpleMap extends Component {
           zoom={zoom}
         >
           {
-            locations.map((geometry, index) => (
+            locations.map((location, index) => (
               <Marker
                 key={index}
-                location={geometry.coordinates}
+                location={location}
               />
             ))
           }
