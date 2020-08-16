@@ -41,7 +41,6 @@ class SimpleMap extends Component {
 }
 
 SimpleMap.propTypes = {
-  handleSearchByName: PropTypes.func.isRequired,
   locations: PropTypes.array.isRequired,
   zoom: PropTypes.number.isRequired,
 };

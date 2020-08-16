@@ -59,7 +59,7 @@ SearchDom.propTypes = {
   onsubmitSearch: PropTypes.func.isRequired,
   handleTownChange: PropTypes.func.isRequired,
   towns: PropTypes.array.isRequired,
-  selectedTown: PropTypes.string.isRequired,
+  selectedTown: PropTypes.string,
   selectedCounty: PropTypes.string.isRequired,
 };
 

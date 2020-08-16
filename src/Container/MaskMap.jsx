@@ -38,6 +38,7 @@ class MaskMap extends Component {
       }
     });
     this.setState({
+      ...this.state,
       towns,
       selectedCounty: val,
     });
