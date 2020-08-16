@@ -18,7 +18,17 @@ class MaskMap extends Component {
       filteredDrugStores: [],
       locations: [],
       zoom: 11,
+      apiMaps: {},
     };
+  }
+
+  setGoogleMaps = (map, maps) => {
+    this.setState({
+      apiMaps: {
+        mapInstance: map,
+        mapApi: maps,
+      },
+    });
   }
 
   async componentDidMount() {
@@ -134,6 +144,7 @@ class MaskMap extends Component {
         <Layout>
           <Content>
             <Map
+             setGoogleMaps={this.setGoogleMaps}
              locations={this.state.locations}
              zoom={this.state.zoom}
             />

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import PropTypes from 'prop-types';
-// import { meters2ScreenPixels } from 'google-map-react/utils';
 import Marker from './Marker';
 
 class SimpleMap extends Component {
@@ -24,13 +23,17 @@ class SimpleMap extends Component {
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
           defaultCenter={center}
-          zoom={zoom}
+          defaultZoom={zoom}
+          yesIWantToUseGoogleMapApiInternals
+          onGoogleApiLoaded={({ map, maps }) => { this.props.setGoogleMaps(map, maps); }}
         >
           {
             locations.map((location, index) => (
               <Marker
                 key={index}
                 location={location}
+                lat={location[1]}
+                lng={location[0]}
               />
             ))
           }
@@ -43,6 +46,7 @@ class SimpleMap extends Component {
 SimpleMap.propTypes = {
   locations: PropTypes.array.isRequired,
   zoom: PropTypes.number.isRequired,
+  setGoogleMaps: PropTypes.func.isRequired,
 };
 
 export default SimpleMap;
