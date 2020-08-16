@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Layout } from 'antd';
+import { Layout, message } from 'antd';
 import PropTypes from 'prop-types';
 
 import { dispatchReceiveDrugStores } from '../Redux/Action/DrugStore';
@@ -58,12 +58,15 @@ class MaskMap extends Component {
     const found = this.loadFilterdDrugStore(selCounty, selTown);
     this.setState({
       filteredDrugStores: found,
-      zoom: 18,
+      zoom: 14,
     });
     const newLocations = [];
     found.forEach((el) => {
       newLocations.push(el.geometry.coordinates);
     });
+    if (newLocations.length === 0) {
+      message.info('查無資料', 2.5);
+    }
     this.setState({
       locations: newLocations,
     });
@@ -102,7 +105,7 @@ class MaskMap extends Component {
     });
     const { geometry } = found;
     this.setState({
-      locations: [].concat(geometry),
+      locations: [[].concat(geometry.coordinates)],
       zoom: 20,
     });
   }

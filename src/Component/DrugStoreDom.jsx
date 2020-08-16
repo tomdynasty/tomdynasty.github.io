@@ -11,7 +11,7 @@ class DrugStoreDom extends Component {
       <>
         {
           filteredDrugStores.map((el) => {
-            const { geometry, properties } = el;
+            const { properties } = el;
             const {
               address,
               id,
