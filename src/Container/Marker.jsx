@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import {
+  Popover,
+  Tag,
+  PageHeader,
+} from 'antd';
+import AvailableTimeTable from './AvailableTimeTable';
 
 class Marker extends Component {
   render() {
     return (
-      <div
-        className="marker"
-      />
+      <Popover
+        content={<AvailableTimeTable />}
+        title= {<PageHeader
+          title="全球藥師藥局"
+          tags={<Tag color="blue">營業中</Tag>}
+         />}
+      >
+        <div className='marker'></div>
+      </Popover>
     );
   }
 }
-
-Marker.propTypes = {
-  location: PropTypes.array.isRequired,
-};
 
 export default Marker;

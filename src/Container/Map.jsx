@@ -51,7 +51,6 @@ class SimpleMap extends Component {
             locations.map((location, index) => (
               <Marker
                 key={index}
-                location={location}
                 lat={location[1]}
                 lng={location[0]}
               />

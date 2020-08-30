@@ -19,6 +19,7 @@ class MaskMap extends Component {
       locations: [],
       zoom: 11,
       apiMaps: {},
+      available: '',
     };
   }
 
@@ -88,6 +89,7 @@ class MaskMap extends Component {
 
   loadFilterdDrugStore = (selCounty, selTown) => {
     const { drugStoresMatchedMap } = this.props;
+    // console.log(drugStoresMatchedMap);
     const found = drugStoresMatchedMap.filter((el) => {
       const { properties } = el;
       const { town, county } = properties;
