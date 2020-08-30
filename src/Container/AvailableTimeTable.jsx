@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { Table } from 'antd';
 
-class AvailableTimeTable extends Component {
+class AvailableTimeTable extends PureComponent {
   getOnOrOffIcon = (str) => (
     str.includes('看診')
       ? <FontAwesomeIcon icon={faCheckCircle}/>
@@ -108,8 +109,9 @@ class AvailableTimeTable extends Component {
         dataIndex: 'sunday',
       },
     ];
-    const availableTime = '星期一上午休診、星期二上午看診、星期三上午看診、星期四上午看診、星期五上午看診、星期六上午看診、星期日上午看診、星期一下午看診、星期二下午看診、星期三下午看診、星期四下午看診、星期五下午看診、星期六下午看診、星期日下午看診、星期一晚上看診、星期二晚上看診、星期三晚上看診、星期四晚上看診、星期五晚上看診、星期六晚上看診、星期日晚上看診';
-    const availableTimeToArray = availableTime.split('、');
+    const { infoWindowContent } = this.props;
+    const { available } = infoWindowContent;
+    const availableTimeToArray = available.split('、');
     const morningPeriods = availableTimeToArray.slice(0, 7);
     const afternoonPeriods = availableTimeToArray.slice(7, 14);
     const nightPeriods = availableTimeToArray.slice(14, 21);
@@ -125,9 +127,14 @@ class AvailableTimeTable extends Component {
         columns={columns}
         size="small"
         rowKey="timePeriod"
+        bordered
       />
     );
   }
 }
+
+AvailableTimeTable.propTypes = {
+  infoWindowContent: PropTypes.object.isRequired,
+};
 
 export default AvailableTimeTable;

@@ -11,6 +11,7 @@ class SimpleMap extends Component {
         lat: 25.075321,
         lng: 121.365495,
       },
+
     };
   }
 
@@ -25,7 +26,7 @@ class SimpleMap extends Component {
   }
 
   render() {
-    const { locations, zoom } = this.props;
+    const { locations, zoom, infoWindowContent } = this.props;
     let defaultCenter = {
       lat: 25.075321,
       lng: 121.365495,
@@ -44,6 +45,7 @@ class SimpleMap extends Component {
           defaultCenter={defaultCenter}
           center={defaultCenter}
           zoom={zoom}
+          onChildClick={this.props.handleMarkerClick}
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => { this.props.setGoogleMaps(map, maps); }}
         >
@@ -53,6 +55,8 @@ class SimpleMap extends Component {
                 key={index}
                 lat={location[1]}
                 lng={location[0]}
+                isShowInfoWindow={location[2]}
+                infoWindowContent={infoWindowContent}
               />
             ))
           }
@@ -64,8 +68,10 @@ class SimpleMap extends Component {
 
 SimpleMap.propTypes = {
   locations: PropTypes.array.isRequired,
+  infoWindowContent: PropTypes.object.isRequired,
   zoom: PropTypes.number.isRequired,
   setGoogleMaps: PropTypes.func.isRequired,
+  handleMarkerClick: PropTypes.func.isRequired,
 };
 
 export default SimpleMap;

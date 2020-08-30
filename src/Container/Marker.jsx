@@ -4,22 +4,35 @@ import {
   Tag,
   PageHeader,
 } from 'antd';
+import PropTypes from 'prop-types';
 import AvailableTimeTable from './AvailableTimeTable';
 
 class Marker extends Component {
   render() {
+    const { infoWindowContent, isShowInfoWindow } = this.props;
+    const { name } = infoWindowContent;
     return (
-      <Popover
-        content={<AvailableTimeTable />}
+      <>
+      <div className='marker' />
+      {
+        isShowInfoWindow
+          ? <Popover
+        content={<AvailableTimeTable infoWindowContent={infoWindowContent}/>}
         title= {<PageHeader
-          title="全球藥師藥局"
+          title={name}
           tags={<Tag color="blue">營業中</Tag>}
          />}
-      >
-        <div className='marker'></div>
-      </Popover>
+        visible={isShowInfoWindow}
+      ></Popover> : null
+      }
+      </>
     );
   }
 }
+
+Marker.propTypes = {
+  infoWindowContent: PropTypes.object.isRequired,
+  isShowInfoWindow: PropTypes.bool.isRequired,
+};
 
 export default Marker;

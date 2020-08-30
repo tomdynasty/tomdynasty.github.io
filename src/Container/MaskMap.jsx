@@ -20,6 +20,7 @@ class MaskMap extends Component {
       zoom: 11,
       apiMaps: {},
       available: '',
+      infoWindowContent: {},
     };
   }
 
@@ -63,6 +64,7 @@ class MaskMap extends Component {
     });
     const newLocations = [];
     found.forEach((el) => {
+      el.geometry.coordinates[2] = false;
       newLocations.push(el.geometry.coordinates);
     });
     if (newLocations.length === 0) {
@@ -80,6 +82,7 @@ class MaskMap extends Component {
     });
     const newLocations = [];
     found.forEach((el) => {
+      el.geometry.coordinates[2] = false;
       newLocations.push(el.geometry.coordinates);
     });
     this.setState({
@@ -89,7 +92,6 @@ class MaskMap extends Component {
 
   loadFilterdDrugStore = (selCounty, selTown) => {
     const { drugStoresMatchedMap } = this.props;
-    // console.log(drugStoresMatchedMap);
     const found = drugStoresMatchedMap.filter((el) => {
       const { properties } = el;
       const { town, county } = properties;
@@ -109,6 +111,31 @@ class MaskMap extends Component {
     this.setState({
       locations: [[].concat(geometry.coordinates)],
       zoom: 20,
+    });
+  }
+
+  handleMarkerClick = (key, childProps) => {
+    const { locations } = this.state;
+    const { lng, lat } = childProps;
+    if (locations[key][0] !== lng && locations[key][1] !== lat) {
+      return;
+    }
+    // eslint-disable-next-line no-param-reassign
+    locations.forEach((el) => { el[2] = false; });
+    const allStores = this.state.filteredDrugStores;
+    const found = allStores.find((el) => {
+      const { coordinates } = el.geometry;
+      return coordinates[1] === lat && coordinates[0] === lng;
+    });
+    // open certian infoWindow
+    locations[key][2] = !locations[key][2];
+    this.setState({
+      ...this.state,
+      infoWindowContent: {
+        name: found.properties.name,
+        available: found.properties.available,
+        open: true,
+      },
     });
   }
 
@@ -152,6 +179,8 @@ class MaskMap extends Component {
              setGoogleMaps={this.setGoogleMaps}
              locations={this.state.locations}
              zoom={this.state.zoom}
+             handleMarkerClick={this.handleMarkerClick}
+             infoWindowContent={this.state.infoWindowContent}
             />
           </Content>
         </Layout>
