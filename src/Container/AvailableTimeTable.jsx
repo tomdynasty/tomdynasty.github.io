@@ -4,42 +4,78 @@ import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { Table } from 'antd';
 
 class AvailableTimeTable extends Component {
+  getOnOrOffIcon = (str) => (
+    str.includes('看診')
+      ? <FontAwesomeIcon icon={faCheckCircle}/>
+      : <FontAwesomeIcon icon={faTimesCircle}/>
+  )
+
+  getWeekdayObj = (obj, el) => {
+    switch (true) {
+      case (el.includes('星期一')):
+        return {
+          key: 'monday',
+          icon: this.getOnOrOffIcon(el),
+        };
+      case (el.includes('星期二')):
+        return {
+          key: 'tuesday',
+          icon: this.getOnOrOffIcon(el),
+        };
+      case (el.includes('星期三')):
+        return {
+          key: 'wednesday',
+          icon: this.getOnOrOffIcon(el),
+        };
+      case (el.includes('星期四')):
+        return {
+          key: 'thursday',
+          icon: this.getOnOrOffIcon(el),
+        };
+      case (el.includes('星期五')):
+        return {
+          key: 'friday',
+          icon: this.getOnOrOffIcon(el),
+        };
+      case (el.includes('星期六')):
+        return {
+          key: 'saturday',
+          icon: this.getOnOrOffIcon(el),
+        };
+      case (el.includes('星期日')):
+        return {
+          key: 'sunday',
+          icon: this.getOnOrOffIcon(el),
+        };
+      default:
+        break;
+    }
+    return { key: 'something wrong' };
+  }
+
+  convertPeriodsArrToRowData = (periods, timePeriod) => {
+    const obj = { timePeriod };
+    periods.every((el) => {
+      if (timePeriod === '上午') {
+        const weekdayObj = this.getWeekdayObj(obj, el);
+        obj[weekdayObj.key] = weekdayObj.icon;
+        return true;
+      }
+      if (timePeriod === '下午') {
+        const weekdayObj = this.getWeekdayObj(obj, el);
+        obj[weekdayObj.key] = weekdayObj.icon;
+        return true;
+      }
+      if (timePeriod === '晚上') {
+        const weekdayObj = this.getWeekdayObj(obj, el);
+        obj[weekdayObj.key] = weekdayObj.icon;
+      }
+      return true;
+    });
+    return obj;
+  }
+
   render() {
-    const availableTime = '星期一上午休診、星期二上午看診、星期三上午看診、星期四上午看診、星期五上午看診、星期六上午看診、星期日上午看診、星期一下午看診、星期二下午看診、星期三下午看診、星期四下午看診、星期五下午看診、星期六下午看診、星期日下午看診、星期一晚上看診、星期二晚上看診、星期三晚上看診、星期四晚上看診、星期五晚上看診、星期六晚上看診、星期日晚上看診';
-    const availableTimeToArray = availableTime.split('、');
-    const morningPeriods = availableTimeToArray.slice(0, 7);
-    const afternoonPeriods = availableTimeToArray.slice(7, 14);
-    const nightPeriods = availableTimeToArray.slice(14, 21);
-    const MorRowObj = {
-      timePeriod: '早上',
-      monday: <FontAwesomeIcon icon={faCheckCircle}/>,
-      tuesday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      wednesday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Thursday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Friday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Saturday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Sunday: <FontAwesomeIcon icon={faTimesCircle}/>,
-    };
-    const afternoonRowObj = {
-      timePeriod: '下午',
-      monday: <FontAwesomeIcon icon={faCheckCircle}/>,
-      tuesday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      wednesday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Thursday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Friday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Saturday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Sunday: <FontAwesomeIcon icon={faTimesCircle}/>,
-    };
-    const nightRowObj = {
-      timePeriod: '下午',
-      monday: <FontAwesomeIcon icon={faCheckCircle}/>,
-      tuesday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      wednesday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Thursday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Friday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Saturday: <FontAwesomeIcon icon={faTimesCircle}/>,
-      Sunday: <FontAwesomeIcon icon={faTimesCircle}/>,
-    };
     const columns = [
       {
         title: '',
@@ -63,26 +99,35 @@ class AvailableTimeTable extends Component {
       },
       {
         title: '星期四',
-        key: 'Thursday',
-        dataIndex: 'Thursday',
+        key: 'thursday',
+        dataIndex: 'thursday',
       },
       {
         title: '星期五',
-        key: 'Friday',
-        dataIndex: 'Friday',
+        key: 'friday',
+        dataIndex: 'friday',
       },
       {
         title: '星期六',
-        key: 'Saturday',
-        dataIndex: 'Saturday',
+        key: 'saturday',
+        dataIndex: 'saturday',
       },
       {
         title: '星期日',
-        key: 'Sunday',
-        dataIndex: 'Sunday',
+        key: 'sunday',
+        dataIndex: 'sunday',
       },
     ];
-    const data = [MorRowObj, afternoonRowObj, nightRowObj];
+    const availableTime = '星期一上午休診、星期二上午看診、星期三上午看診、星期四上午看診、星期五上午看診、星期六上午看診、星期日上午看診、星期一下午看診、星期二下午看診、星期三下午看診、星期四下午看診、星期五下午看診、星期六下午看診、星期日下午看診、星期一晚上看診、星期二晚上看診、星期三晚上看診、星期四晚上看診、星期五晚上看診、星期六晚上看診、星期日晚上看診';
+    const availableTimeToArray = availableTime.split('、');
+    const morningPeriods = availableTimeToArray.slice(0, 7);
+    const afternoonPeriods = availableTimeToArray.slice(7, 14);
+    const nightPeriods = availableTimeToArray.slice(14, 21);
+    const data = [
+      this.convertPeriodsArrToRowData(morningPeriods, '上午'),
+      this.convertPeriodsArrToRowData(afternoonPeriods, '下午'),
+      this.convertPeriodsArrToRowData(nightPeriods, '晚上'),
+    ];
     return (
       <Table
         pagination={false}
