@@ -54,25 +54,15 @@ class AvailableTimeTable extends Component {
   }
 
   convertPeriodsArrToRowData = (periods, timePeriod) => {
-    const obj = { timePeriod };
-    periods.every((el) => {
-      if (timePeriod === '上午') {
-        const weekdayObj = this.getWeekdayObj(obj, el);
-        obj[weekdayObj.key] = weekdayObj.icon;
-        return true;
+    const rowObj = { timePeriod };
+    const arr = ['上午', '下午', '晚上'];
+    periods.forEach((el) => {
+      if (arr.includes(timePeriod)) {
+        const weekdayObj = this.getWeekdayObj(rowObj, el);
+        rowObj[weekdayObj.key] = weekdayObj.icon;
       }
-      if (timePeriod === '下午') {
-        const weekdayObj = this.getWeekdayObj(obj, el);
-        obj[weekdayObj.key] = weekdayObj.icon;
-        return true;
-      }
-      if (timePeriod === '晚上') {
-        const weekdayObj = this.getWeekdayObj(obj, el);
-        obj[weekdayObj.key] = weekdayObj.icon;
-      }
-      return true;
     });
-    return obj;
+    return rowObj;
   }
 
   render() {
